@@ -6,3 +6,5 @@ Allow to check the status of machines each x seconds (30 by default). If a host 
 ![Main interface](http://dl.tutosfaciles48.fr/host-ping-checker/HostPingChecker-Main.jpg)
 
 ![SMTP Settings](http://dl.tutosfaciles48.fr/host-ping-checker/HostPingChecker-SMTP-Settings.jpg)
+
+The host list can be saved and loaded for future use
