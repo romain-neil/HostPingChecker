@@ -5,7 +5,6 @@ import fr.chsn.hostpingchecker.utils.HostStatusUtil;
 import java.io.IOException;
 import java.io.Serializable;
 import java.net.InetAddress;
-import java.net.UnknownHostException;
 
 /**
  * Classe qui définie un item d'une machine
@@ -20,24 +19,18 @@ public class HostItem implements Serializable {
 	private String m_hostName;
 
 	/**
-	 * Nom dns de la machine
-	 */
-	private final String m_dnsHostName;
-
-	/**
 	 * Adresse IP de la machine
 	 */
-	private InetAddress m_hostIP;
+	private final InetAddress m_hostIP;
 
 	/**
 	 * Dernier état de la machine
 	 */
 	private HostStatusUtil.Status m_hostStatus;
 
-	public HostItem(String name, String address) throws UnknownHostException {
+	public HostItem(String name, InetAddress address) {
 		m_hostName = name;
-		m_hostIP = InetAddress.getByName(address);
-		m_dnsHostName = address;
+		m_hostIP = address;
 		m_hostStatus = HostStatusUtil.Status.UNKNOWN;
 	}
 
@@ -54,10 +47,6 @@ public class HostItem implements Serializable {
 		return m_hostName;
 	}
 
-	public String getDNSHostName() {
-		return m_dnsHostName;
-	}
-
 	public void setHostName(String newName) {
 		m_hostName = newName;
 	}
@@ -68,14 +57,6 @@ public class HostItem implements Serializable {
 	 */
 	public InetAddress getHostIP() {
 		return m_hostIP;
-	}
-
-	/**
-	 * Set the new ip address of the host
-	 * @param addr new ip address of the host
-	 */
-	public void setHostIP(InetAddress addr) {
-		m_hostIP = addr;
 	}
 
 	/**
