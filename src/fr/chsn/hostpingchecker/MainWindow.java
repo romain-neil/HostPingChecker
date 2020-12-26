@@ -15,7 +15,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Date;
 import java.util.Objects;
@@ -63,6 +62,8 @@ public class MainWindow extends JFrame implements KeyListener {
 		btnStart = new JButton(iconStart);
 		JButton btnStop = new JButton(iconStop);
 		btnStop.setEnabled(false);
+
+		JButton btnRefreshIP = new JButton("Rafraichir les ip");
 
 		lblStatus = new JLabel("");
 
@@ -140,8 +141,11 @@ public class MainWindow extends JFrame implements KeyListener {
 
 		/* Panneau des boutons */
 		JPanel panelButtons = new JPanel();
-		panelButtons.add(btnStart);
-		panelButtons.add(btnStop);
+		panelButtons.setLayout(new BorderLayout());
+
+		panelButtons.add(btnStart, BorderLayout.WEST);
+		panelButtons.add(btnStop, BorderLayout.EAST);
+		panelButtons.add(btnRefreshIP, BorderLayout.SOUTH);
 
 		/* Barre de status */
 		JPanel statusPanel = new JPanel();
@@ -169,9 +173,7 @@ public class MainWindow extends JFrame implements KeyListener {
 				String machine = nomMachine.getText();
 
 				if(!ip.isEmpty() && !machine.isEmpty()) {
-					InetAddress addr = InetAddress.getByName(ip);
-
-					model.addItem(new HostItem(machine, addr));
+					model.addItem(new HostItem(machine, ip));
 				}
 			} catch (UnknownHostException unknownHostException) {
 				unknownHostException.printStackTrace();
@@ -212,6 +214,21 @@ public class MainWindow extends JFrame implements KeyListener {
 			enableInputs(true);
 		});
 
+		btnRefreshIP.addActionListener((ActionEvent e) -> {
+			if(model.getRowCount() != 0) {
+				btnRefreshIP.setEnabled(false);
+
+				try {
+					model.refreshIPs();
+				} catch (UnknownHostException unknownHostException) {
+					unknownHostException.printStackTrace();
+
+					JOptionPane.showMessageDialog(this, "Erreur", "La mise a jour de l'adresse ip a échoué sur une machine", JOptionPane.ERROR_MESSAGE);
+				}
+
+				btnRefreshIP.setEnabled(true);
+			}
+		});
 	}
 
 	/**

@@ -1,9 +1,12 @@
 package fr.chsn.hostpingchecker;
 
 import fr.chsn.hostpingchecker.utils.ImageUtil;
+import org.apache.commons.validator.routines.InetAddressValidator;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -100,7 +103,6 @@ public class DynamicObjectModel extends AbstractTableModel {
 		};
 	}
 
-	//TODO: Bouton to refresh IP address
 	@Override
 	public boolean isCellEditable(int rowIndex, int columnIndex) {
 		return (columnIndex == 0);
@@ -128,5 +130,16 @@ public class DynamicObjectModel extends AbstractTableModel {
 		items.clear();
 
 		fireTableDataChanged();
+	}
+
+	public void refreshIPs() throws UnknownHostException {
+		InetAddressValidator validator = InetAddressValidator.getInstance();
+
+		for(HostItem item : items) {
+			if(!validator.isValid(item.getDNSHostName())) { //Si le nom dns n'est pas une adresse ip valide
+				//Alors on peut mettre à jour l'adresse de la machine
+				item.setHostIP(InetAddress.getByName(item.getHostName()));
+			}
+		}
 	}
 }
