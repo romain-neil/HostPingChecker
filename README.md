@@ -9,4 +9,4 @@ Allow to check the status of machines each x seconds (30 by default). If a host 
 
 The host list can be saved and loaded for future use
 
-You can access java [here](https://tutosfaciles48.github.io/HostPingChecker/doc/)
+You can access javadoc [here](https://tutosfaciles48.github.io/HostPingChecker/doc/)
