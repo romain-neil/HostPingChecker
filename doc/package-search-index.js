@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"fr.chsn.hostpingchecker"},{"l":"fr.chsn.hostpingchecker.actions"},{"l":"fr.chsn.hostpingchecker.tasks"},{"l":"fr.chsn.hostpingchecker.utils"}]
