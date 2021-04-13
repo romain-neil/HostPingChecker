@@ -2,12 +2,11 @@ package fr.chsn.hostpingchecker.actions;
 
 import fr.chsn.hostpingchecker.HostItem;
 import fr.chsn.hostpingchecker.MainWindow;
+import fr.chsn.hostpingchecker.utils.HostListUtil;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.util.List;
 
 /**
@@ -29,27 +28,11 @@ public class SaveListAction extends AbstractAction {
 		List<HostItem> list = parent.getModel().getHostList();
 
 		if(!list.isEmpty()) {
-			ObjectOutputStream oos = null;
-
 			try {
-				final FileOutputStream file = new FileOutputStream(parent.SAVE_FILE);
-				oos = new ObjectOutputStream(file);
-				oos.writeObject(list);
-				oos.flush();
-			} catch (IOException ex) {
-				ex.printStackTrace();
-				JOptionPane.showMessageDialog(parent, "Une erreur est survenue lors de l'enregistrement. Merci de reessayer", "Erreur", JOptionPane.ERROR_MESSAGE);
-			} finally {
-				try {
-					if(oos != null) {
-						oos.flush();
-						oos.close();
-
-						parent.setStatus("Sauvegarde effectuée");
-					}
-				} catch (IOException exception) {
-					exception.printStackTrace();
-				}
+				HostListUtil.save(list);
+			} catch (IOException ioException) {
+				ioException.printStackTrace();
+				JOptionPane.showMessageDialog(parent, "Une ereeur est survenue lors de l'enregistrement de la liste des machines", "Erreur", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 	}

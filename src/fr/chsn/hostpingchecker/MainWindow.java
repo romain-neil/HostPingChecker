@@ -45,8 +45,6 @@ public class MainWindow extends JFrame implements KeyListener {
 
 	private java.util.Timer t;
 
-	public final String SAVE_FILE = "host.dat";
-
 	public void loadPreferences() {
 		interval = prefManager.getInt("interval", 30);
 	}
@@ -268,7 +266,7 @@ public class MainWindow extends JFrame implements KeyListener {
 		SendAlert alerte = new SendAlert(this, liste);
 
 		if(!alerte.send()) {//Silent warning
-			System.err.println("Error: unable to send alert mail at " + new Date().toString() + " !");
+			System.err.println("Error: unable to send alert mail at " + new Date() + " !");
 		}
 	}
 

@@ -1,6 +1,7 @@
 package fr.chsn.hostpingchecker.utils;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Objects;
 import java.util.Scanner;
 
 /**
@@ -17,7 +18,7 @@ public class ResourceUtil {
 	 * @return le contenu du fichier s'il existe
 	 */
 	public static String getResourceContent(Object base, String path) {
-		return new Scanner(base.getClass().getResourceAsStream(path), StandardCharsets.UTF_8).next();
+		return new Scanner(Objects.requireNonNull(base.getClass().getResourceAsStream(path)), StandardCharsets.UTF_8).next();
 	}
 
 }
