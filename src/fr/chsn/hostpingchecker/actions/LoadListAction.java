@@ -5,7 +5,6 @@ import fr.chsn.hostpingchecker.utils.HostListUtil;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**

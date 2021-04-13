@@ -266,7 +266,7 @@ public class MainWindow extends JFrame implements KeyListener {
 		SendAlert alerte = new SendAlert(this, liste);
 
 		if(!alerte.send()) {//Silent warning
-			System.err.println("Error: unable to send alert mail at " + new Date() + " !");
+			setStatus("Error: unable to send alert mail at " + new Date() + " !");
 		}
 	}
 
