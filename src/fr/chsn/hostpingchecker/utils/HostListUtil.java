@@ -20,6 +20,7 @@ public class HostListUtil {
 	/**
 	 * Sauvegarde la liste des machines dans un fichier json
 	 * @param liste la liste des machines à sauvegarder
+	 * @throws IOException si erreur lors de l'ouverture fu fichier
 	 */
 	public static void save(List<HostItem> liste) throws IOException {
 		Gson gson = new Gson();

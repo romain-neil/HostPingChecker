@@ -1,9 +1,7 @@
 .idea/
 target/
-<<<<<<< HEAD
 doc/
 =======
->>>>>>> Ajout d'un bouton pour rafraichir les ip associées aux noms dns
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup
