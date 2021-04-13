@@ -35,6 +35,7 @@ public class HostListUtil {
 	/**
 	 * Retourne la liste des machines depuis le fichier json
 	 * @return la liste des machines sauvegardées
+	 * @throws IOException si erreur lors de l'ouverture du fichier
 	 */
 	public static List<HostItem> get() throws IOException {
 		Gson gson = new Gson();
