@@ -3,7 +3,6 @@ package fr.chsn.hostpingchecker;
 import fr.chsn.hostpingchecker.utils.HostStatusUtil;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
@@ -12,7 +11,7 @@ import java.net.UnknownHostException;
  * @author Romain Neil
  * @since 1.0.0
  */
-public class HostItem implements Serializable {
+public class HostItem {
 
 	/**
 	 * Nom de la machine
