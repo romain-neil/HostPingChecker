@@ -40,6 +40,7 @@ public class MainWindow extends JFrame implements KeyListener {
 
 	private final JTextField nomMachine = new JTextField(10);
 	private final JTextField adresseIP = new JTextField(10);
+	private final JTextField adresseMAC = new JTextField(10);
 
 	private final DynamicObjectModel model = new DynamicObjectModel();
 
@@ -100,6 +101,7 @@ public class MainWindow extends JFrame implements KeyListener {
 
 		JLabel labelHostName = new JLabel("Nom de la machine :");
 		JLabel labelHostAddress = new JLabel("Adresse IP de la machine :");
+		JLabel labelHostMAC = new JLabel("Adresse MAC de la machine :");
 
 		/* Panneau du formulaire */
 		JPanel formPanel = new JPanel();
@@ -130,11 +132,21 @@ public class MainWindow extends JFrame implements KeyListener {
 		c.gridy = 1;
 		formPanel.add(adresseIP, c);
 
+		c.gridx = 0;
+		c.gridy = 2;
+		formPanel.add(labelHostMAC, c);
+
+		c.weightx = 2.0;
+		c.gridx = 1;
+		c.gridy = 2;
+		formPanel.add(adresseMAC, c);
+
+
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.weightx = 0.0;
 		c.gridwidth = 2;
 		c.gridx = 0;
-		c.gridy = 2;
+		c.gridy = 3;
 		formPanel.add(btnAdd, c);
 
 		/* Panneau des boutons */
@@ -169,9 +181,10 @@ public class MainWindow extends JFrame implements KeyListener {
 			try {
 				String ip = adresseIP.getText();
 				String machine = nomMachine.getText();
+				String mac = adresseMAC.getText();
 
 				if(!ip.isEmpty() && !machine.isEmpty()) {
-					model.addItem(new HostItem(machine, ip));
+					model.addItem(new HostItem(machine, ip ,mac));
 				}
 			} catch (UnknownHostException unknownHostException) {
 				unknownHostException.printStackTrace();

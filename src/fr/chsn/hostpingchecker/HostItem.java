@@ -29,14 +29,21 @@ public class HostItem {
 	private InetAddress m_hostIP;
 
 	/**
+	 * Adresse MAC de la machine
+	 * @since 1.12.1
+	 */
+	private String m_hostMac;
+
+	/**
 	 * Dernier état de la machine
 	 */
 	private HostStatusUtil.Status m_hostStatus;
 
-	public HostItem(String name, String address) throws UnknownHostException {
+	public HostItem(String name, String address, String mac) throws UnknownHostException {
 		m_hostName = name;
-		m_hostIP = InetAddress.getByName(address);
 		m_dnsHostName = address;
+		m_hostIP = InetAddress.getByName(address);
+		m_hostMac = mac;
 		m_hostStatus = HostStatusUtil.Status.UNKNOWN;
 	}
 
@@ -67,6 +74,24 @@ public class HostItem {
 	 */
 	public InetAddress getHostIP() {
 		return m_hostIP;
+	}
+
+	/**
+	 * Return the host MAC address
+	 * @return the MAC address of the host
+	 * @since 1.12.1
+	 */
+	public String getMACAddress() {
+		return m_hostMac;
+	}
+
+	/**
+	 * Set the new MAC address for the host
+	 * @param newMac the new MAC address
+	 * @since 1.12.1
+	 */
+	public void setMACAddress(String newMac) {
+		m_hostMac = newMac;
 	}
 
 	/**
