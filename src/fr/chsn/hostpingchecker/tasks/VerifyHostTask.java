@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.TimerTask;
 
@@ -19,43 +20,52 @@ public class VerifyHostTask extends TimerTask {
 
 	private static final Logger logger = LogManager.getLogger("VerifyHostTask");
 
+	private static final List<HostItem> downHostsList = Collections.synchronizedList(new ArrayList<>());
+
 	public VerifyHostTask(MainWindow parent) {
 		this.model = parent.getModel();
 		this.parent = parent;
 	}
 
-	@Override
-	public void run() {
-		List<HostItem> machines = model.getHostList();
+	/**
+	 * Update the list of host who are down
+	 * @throws IOException if the application cannot perform a ping to a target host
+	 * @since 1.12.2
+	 */
+	private void updateDownHostList() throws IOException {
+		if(downHostsList.size() != 0) {
+			for(HostItem host : downHostsList) { //For each down machine
+				HostStatusUtil.Status hostStatus = host.getStatus();
 
-		List<HostItem> downHosts = new ArrayList<>();
-
-		//Run task here, i.e. verify host reachability
-		for (HostItem host : machines) {
-			try {
-				if (!host.isReachable()) {
-					logger.info("Host {} is not reachable", host.getHostName());
-
-					//Si le dernier status n'état pas Bad, alors cet hôte est devenu injoingable
-					if(host.getStatus() != HostStatusUtil.Status.BAD) {
-						downHosts.add(host);
+				//If the host was previously reachable
+				if(hostStatus != HostStatusUtil.Status.BAD) {
+					if(!host.isReachable()) { //If the host is down
+						downHostsList.add(host);
 						host.setStatus(HostStatusUtil.Status.BAD);
 
 						System.out.println("New host down : " + host.getHostName());
+					} else {
+						//The host is reachable
+						downHostsList.remove(host);
+						host.setStatus(HostStatusUtil.Status.OK);
 					}
-				} else {
-					//La cible est atteignable
-					host.setStatus(HostStatusUtil.Status.OK);
 				}
-			} catch (IOException e) {
-				logger.error("Error during test accessibility of host {} : " + e.getMessage(), host.getHostName());
-				e.printStackTrace();
 			}
+		}
+	}
+
+	@Override
+	public void run() {
+		try {
+			updateDownHostList();
+		} catch (IOException e) {
+			e.printStackTrace();
+			logger.warn("Unable to update the list of down list");
 		}
 
 		//On envoi l'alerte par mail
-		if(parent.isMailSendEnabled() && !downHosts.isEmpty()) {
-			parent.sendMail(downHosts);
+		if(parent.isMailSendEnabled() && !downHostsList.isEmpty()) {
+			parent.sendMail(downHostsList);
 			System.out.println("On envoi un mail");
 		}
 
