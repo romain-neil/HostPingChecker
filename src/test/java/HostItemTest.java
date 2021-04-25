@@ -1,7 +1,10 @@
 import fr.chsn.hostpingchecker.HostItem;
+import fr.chsn.hostpingchecker.utils.HostStatusUtil;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
@@ -11,8 +14,8 @@ class HostItemTest {
 
 	static HostItem testItem;
 
-	@BeforeAll
-	static void init() throws UnknownHostException {
+	@BeforeEach
+	void initBeforeEach() throws UnknownHostException {
 		testItem = new HostItem("test", "127.0.0.1", "");
 	}
 
@@ -55,9 +58,33 @@ class HostItemTest {
 
 	@Test
 	void testGetHostMAC() {
-		assertFalse(testItem.getMACAddress().isEmpty());
+		assertEquals("", testItem.getMACAddress());
 	}
 
+	@Test
+	void testSetStatus() {
+		HostStatusUtil.Status newStatus = HostStatusUtil.Status.OK;
 
+		testItem.setStatus(newStatus);
+
+		assertEquals(testItem.getStatus(), newStatus);
+	}
+
+	@Test
+	void testGetStatus() {
+		assertEquals(testItem.getStatus(), HostStatusUtil.Status.UNKNOWN);
+	}
+
+	@Test
+	void testGetDnsHostname() {
+		assertFalse(testItem.getDNSHostName().isEmpty());
+	}
+
+	@Test
+	void testHostIsReachable() {
+		assertDoesNotThrow(() -> {
+			testItem.isReachable();
+		});
+	}
 
 }
