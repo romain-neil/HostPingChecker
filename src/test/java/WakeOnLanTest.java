@@ -1,5 +1,4 @@
-package fr.chsn.hostpingchecker.utils;
-
+import fr.chsn.hostpingchecker.utils.WakeOnLan;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
