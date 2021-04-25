@@ -60,6 +60,10 @@ public class HostItem {
 		return m_hostName;
 	}
 
+	/**
+	 * @since 1.12.0
+	 * @return the host name of the machine
+	 */
 	public String getDNSHostName() {
 		return m_dnsHostName;
 	}
