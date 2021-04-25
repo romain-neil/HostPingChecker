@@ -1,9 +1,9 @@
 import fr.chsn.hostpingchecker.DynamicObjectModel;
 import fr.chsn.hostpingchecker.HostItem;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import javax.swing.ImageIcon;
 import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -17,15 +17,17 @@ class DynamicObjectModelTest {
 	static DynamicObjectModel dom;
 	static List<HostItem> testItemList = Collections.synchronizedList(new ArrayList<>());
 
-	@BeforeAll
-	static void init() throws UnknownHostException {
+	@BeforeEach
+	void initBeforeEach() throws UnknownHostException {
+		HostItem item = new HostItem("test", "127.0.0.2", "");
+
 		dom = new DynamicObjectModel();
 
-		testItemList.add(new HostItem("test", "127.0.0.2", ""));
+		dom.addItem(item);
+		testItemList.add(item);
 	}
 
 	@Test
-	@Order(1)
 	void testAddItem() throws IOException {
 		int initialSize = testItemList.size();
 		int domHostListSize = dom.getHostList().size();
@@ -40,20 +42,34 @@ class DynamicObjectModelTest {
 	}
 
 	@Test
-	@Order(2)
 	void testRemoveItem() {
-		dom.getHostList().remove(0);
+		dom.removeItem(0);
 
 		assertEquals(0, dom.getHostList().size());
 	}
 
 	@Test
-	@Order(3)
 	void testRemoveAllItem() {
 		dom.removeAllItems();
 
 		assertEquals(0, dom.getHostList().size());
 	}
 
+	@Test
+	void testGetObjectValueAt() {
+		dom.setList(testItemList);
+
+		assertEquals(String.class, dom.getValueAt(0, 0).getClass());
+		assertEquals(ImageIcon.class, dom.getValueAt(0, 2).getClass());
+	}
+
+	@Test
+	void testGetColumnClass() {
+		assertEquals(String.class, dom.getColumnClass(0));
+		assertEquals(String.class, dom.getColumnClass(1));
+		assertEquals(ImageIcon.class, dom.getColumnClass(2));
+
+		assertEquals(Object.class, dom.getColumnClass(-1)); //Cover default switch case as columnIndex >= 0
+	}
 
 }
