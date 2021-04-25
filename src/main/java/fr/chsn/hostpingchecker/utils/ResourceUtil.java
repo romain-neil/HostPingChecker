@@ -20,5 +20,4 @@ public class ResourceUtil {
 	public static String getResourceContent(Object base, String path) {
 		return new Scanner(Objects.requireNonNull(base.getClass().getResourceAsStream(path)), StandardCharsets.UTF_8).next();
 	}
-
 }
