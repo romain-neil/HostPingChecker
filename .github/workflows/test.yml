@@ -32,8 +32,3 @@ jobs:
           
       - name: Test with Maven
         run: mvn -B test --file pom.xml
-        
-      - name: upload data to codecov
-        run: |
-         mvn cobertura:cobertura
-         bash <(curl -s https://codecov.io/bash)
