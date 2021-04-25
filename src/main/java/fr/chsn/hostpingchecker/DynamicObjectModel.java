@@ -132,6 +132,11 @@ public class DynamicObjectModel extends AbstractTableModel {
 		fireTableDataChanged();
 	}
 
+	/**
+	 * Refresh the ip for all hosts in the list
+	 * @throws UnknownHostException if a host fails to resolve to a ip address
+	 * @since 1
+	 */
 	public void refreshIPs() throws UnknownHostException {
 		InetAddressValidator validator = InetAddressValidator.getInstance();
 
