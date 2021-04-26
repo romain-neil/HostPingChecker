@@ -8,10 +8,18 @@ import java.util.prefs.Preferences;
  */
 public class PreferencesManager {
 
-	private final Preferences prefs;
+	private Preferences prefs;
 
 	public PreferencesManager() {
 		prefs = Preferences.userRoot().node(this.getClass().getName());
+	}
+
+	public void removeKey(String key) {
+		prefs.remove(key);
+	}
+
+	public void setNode(String namespace) {
+		prefs = prefs.node(namespace);
 	}
 
 	/**
