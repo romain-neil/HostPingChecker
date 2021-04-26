@@ -1,5 +1,5 @@
 import fr.chsn.hostpingchecker.utils.PreferencesManager;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -10,9 +10,10 @@ public class PreferenceManagerTest {
 
 	public static final String PARAM_NAME = "param_test";
 
-	@BeforeEach
-	void initBeforeEach() {
+	@BeforeAll
+	static void init() {
 		preferencesManager = new PreferencesManager();
+		preferencesManager.setNode("tests");
 	}
 
 	@Test
@@ -29,12 +30,14 @@ public class PreferenceManagerTest {
 
 		assertEquals(0, preferencesManager.getInt(key, 0));
 
-		preferencesManager.setInt(String.join(PARAM_NAME, "_int"), 42);
+		preferencesManager.setInt(key, 42);
 
 		assertEquals(
 				42,
 				preferencesManager.getInt(key, 0)
 		);
+
+		preferencesManager.removeKey(key);
 	}
 
 	@Test
@@ -46,6 +49,8 @@ public class PreferenceManagerTest {
 		preferencesManager.setBool(key, true);
 
 		assertTrue(preferencesManager.getBool(key, false));
+
+		preferencesManager.removeKey(key);
 	}
 
 	@Test
@@ -64,6 +69,8 @@ public class PreferenceManagerTest {
 				expected,
 				preferencesManager.getString(key, "")
 		);
+
+		preferencesManager.removeKey(key);
 	}
 
 }
