@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class DynamicObjectModelTest {
 
@@ -70,6 +70,29 @@ class DynamicObjectModelTest {
 		assertEquals(ImageIcon.class, dom.getColumnClass(2));
 
 		assertEquals(Object.class, dom.getColumnClass(-1)); //Cover default switch case as columnIndex >= 0
+	}
+
+	@Test
+	void testRefreshBadIpThrow() {
+		assertDoesNotThrow(() -> dom.refreshIPs());
+
+		HostItem invalidHost;
+
+		try {
+			invalidHost = new HostItem("invalid host", "255.255.255.255", "");
+			dom.addItem(invalidHost);
+		} catch (Exception e) {
+			if(e instanceof UnknownHostException) {
+				fail("The method should not perform a dns requets");
+			}
+
+			fail(e.getMessage());
+		}
+
+		//Change host name to invalid domain
+		//dom.getHostList().get(1).setHostName(null);
+
+		//assertThrows(UnknownHostException.class, () -> dom.refreshIPs());
 	}
 
 }

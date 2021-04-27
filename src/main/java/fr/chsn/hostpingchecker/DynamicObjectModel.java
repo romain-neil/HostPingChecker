@@ -135,15 +135,16 @@ public class DynamicObjectModel extends AbstractTableModel {
 	/**
 	 * Refresh the ip for all hosts in the list
 	 * @throws UnknownHostException if a host fails to resolve to a ip address
-	 * @since 1
+	 * @since 1.12.3
 	 */
 	public void refreshIPs() throws UnknownHostException {
 		InetAddressValidator validator = InetAddressValidator.getInstance();
 
 		for(HostItem item : items) {
-			if(!validator.isValid(item.getDNSHostName())) { //Si le nom dns n'est pas une adresse ip valide
-				//Alors on peut mettre à jour l'adresse de la machine
+			if(!validator.isValid(item.getDNSHostName()) && item.getDNSHostName() != null && !item.getDNSHostName().isEmpty()) {
 				item.setHostIP(InetAddress.getByName(item.getHostName()));
+			} else { //DNS hostname is already a IP
+				item.setHostIP(InetAddress.getByName(item.getDNSHostName()));
 			}
 		}
 	}

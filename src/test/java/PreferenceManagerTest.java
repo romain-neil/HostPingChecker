@@ -20,7 +20,17 @@ public class PreferenceManagerTest {
 	void testPrefManagerReturnChainedCall() {
 		assertEquals(
 				PreferencesManager.class,
-				preferencesManager.setBool(PARAM_NAME, false).getClass()
+				preferencesManager.setBool(String.join(PARAM_NAME, "_bool"), false).getClass()
+		);
+
+		assertEquals(
+				PreferencesManager.class,
+				preferencesManager.setInt(String.join(PARAM_NAME, "_int"), 0).getClass()
+		);
+
+		assertEquals(
+				PreferencesManager.class,
+				preferencesManager.setString(String.join(PARAM_NAME, "_string"), "").getClass()
 		);
 	}
 
