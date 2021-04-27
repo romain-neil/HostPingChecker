@@ -3,6 +3,7 @@ package fr.chsn.hostpingchecker.utils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import fr.chsn.hostpingchecker.HostItem;
+import fr.chsn.hostpingchecker.utils.connector.FileSystemConnector;
 import org.apache.commons.io.IOUtils;
 
 import java.io.*;
@@ -26,10 +27,9 @@ public class HostListUtil {
 		Gson gson = new Gson();
 		String json = gson.toJson(liste);
 
-		BufferedWriter writer = new BufferedWriter(new FileWriter(SAVE_FILE));
-		writer.write(json);
-
-		writer.close();
+		FileSystemConnector fs = new FileSystemConnector(new FileWriter(SAVE_FILE));
+		fs.write("", json);
+		fs.close();
 	}
 
 	/**
