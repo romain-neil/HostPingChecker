@@ -3,9 +3,7 @@ package fr.chsn.hostpingchecker.utils.connector;
 public class VirtualFileSystemConnector extends AbstractConnector {
 
 	@Override
-	public void write(String path, String content) {
-
-	}
+	public void write(String path, String content) {}
 
 	@Override
 	public String read(String path) {
@@ -13,8 +11,6 @@ public class VirtualFileSystemConnector extends AbstractConnector {
 	}
 
 	@Override
-	public void close() {
-		//
-	}
+	public void close() {}
 
 }
