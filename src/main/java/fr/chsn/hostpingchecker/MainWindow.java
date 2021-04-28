@@ -28,7 +28,9 @@ public class MainWindow extends JFrame implements KeyListener {
 	ImageIcon iconStop;
 
 	private int interval;
+
 	private boolean mailSendingEnabled = false;
+	private boolean wolEnabled = false;
 
 	private final JButton btnAdd = new JButton("Ajouter");
 
@@ -208,6 +210,7 @@ public class MainWindow extends JFrame implements KeyListener {
 				enableInputs(false);
 
 				mailSendingEnabled = (!prefManager.getString("smtp_addr", "").equals(""));
+				wolEnabled = (prefManager.getBool("enableWOL", false));
 
 				VerifyHostTask verifyHostTask = new VerifyHostTask(this);
 
@@ -290,6 +293,10 @@ public class MainWindow extends JFrame implements KeyListener {
 	 */
 	public boolean isMailSendEnabled() {
 		return mailSendingEnabled;
+	}
+
+	public boolean isWOLEnabled() {
+		return wolEnabled;
 	}
 
 	/**

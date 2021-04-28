@@ -12,6 +12,7 @@ public class PreferencesWindow extends JFrame {
 
 	JCheckBox boxSSLEnabled;
 	JCheckBox boxEnableSendMail;
+	JCheckBox boxEnableWOL;
 
 	JTextField smtpAddress;
 	JTextField smtpUsername;
@@ -35,7 +36,8 @@ public class PreferencesWindow extends JFrame {
 				.setInt("smtp_port", Integer.parseInt(spinnerPort.getValue().toString()))
 				.setBool("smtp_use_ssl", boxSSLEnabled.isSelected())
 				.setInt("interval", Integer.parseInt(spinnerInterval.getValue().toString()))
-				.setBool("enableMailSending", boxEnableSendMail.isSelected());
+				.setBool("enableMailSending", boxEnableSendMail.isSelected())
+				.setBool("enableWOL", boxEnableWOL.isSelected());
 
 			parent.getPrefManager().setString("smtp_pass", new String(smtpPass.getPassword()));
 
@@ -157,6 +159,12 @@ public class PreferencesWindow extends JFrame {
 		c.gridx = 1;
 		c.gridy = 0;
 		ongletMisc.add(spinnerInterval);
+
+		boxEnableWOL = new JCheckBox("Activer le Wake-On-Lan");
+		boxEnableWOL.setSelected(parent.getPrefManager().getBool("enableWOL", false));
+		c.gridx = 0;
+		c.gridy = 1;
+		ongletMisc.add(boxEnableWOL);
 
 		onglets.addTab("Divers", ongletMisc);
 

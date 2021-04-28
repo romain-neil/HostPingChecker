@@ -4,6 +4,7 @@ import fr.chsn.hostpingchecker.DynamicObjectModel;
 import fr.chsn.hostpingchecker.HostItem;
 import fr.chsn.hostpingchecker.MainWindow;
 import fr.chsn.hostpingchecker.utils.HostStatusUtil;
+import fr.chsn.hostpingchecker.utils.WakeOnLan;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -54,6 +55,16 @@ public class VerifyHostTask extends TimerTask {
 		}
 	}
 
+	private void sendWOLToHosts() throws IOException {
+		if(downHostsList.size() != 0) {
+			for(HostItem host : downHostsList) {
+				if(!host.getHostIP().toString().isEmpty() && !host.getMACAddress().isEmpty()) {
+					WakeOnLan.sendToHost(host.getMACAddress(), host.getHostIP().toString());
+				}
+			}
+		}
+	}
+
 	@Override
 	public void run() {
 		try {
@@ -67,6 +78,15 @@ public class VerifyHostTask extends TimerTask {
 		if(parent.isMailSendEnabled() && !downHostsList.isEmpty()) {
 			parent.sendMail(downHostsList);
 			System.out.println("On envoi un mail");
+		}
+
+		if (parent.isWOLEnabled()) {
+			try {
+				sendWOLToHosts();
+			} catch (IOException e) {
+				e.printStackTrace();
+				logger.warn("An error occured when sending WOL to host");
+			}
 		}
 
 		model.fireTableDataChanged();
