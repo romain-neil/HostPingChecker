@@ -46,6 +46,10 @@ public class WakeOnLan {
 		sendToHost(InetAddress.getByName(ip), mac);
 	}
 
+	public static void sendToHost(String mac, String ip) throws IOException {
+		sendToHost(getMACBytes(mac), ip);
+	}
+
 	protected static void sendToHost(InetAddress host, byte[] mac) throws IOException {
 		DatagramPacket packet = new DatagramPacket(mac, mac.length, host, PORT);
 		DatagramSocket socket = new DatagramSocket();
