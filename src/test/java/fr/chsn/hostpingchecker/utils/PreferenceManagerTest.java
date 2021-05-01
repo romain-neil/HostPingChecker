@@ -1,4 +1,5 @@
-import fr.chsn.hostpingchecker.utils.PreferencesManager;
+package fr.chsn.hostpingchecker.utils;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 

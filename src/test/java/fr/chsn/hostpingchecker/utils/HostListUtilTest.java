@@ -1,3 +1,5 @@
+package fr.chsn.hostpingchecker.utils;
+
 import fr.chsn.hostpingchecker.HostItem;
 import fr.chsn.hostpingchecker.utils.connector.VirtualFileSystemConnector;
 import org.junit.jupiter.api.BeforeEach;
