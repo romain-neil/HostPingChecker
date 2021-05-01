@@ -1,5 +1,8 @@
 package fr.chsn.hostpingchecker.utils;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import javax.swing.*;
 import java.awt.*;
 import java.net.URL;
@@ -11,6 +14,8 @@ import java.net.URL;
  */
 public class ImageUtil {
 
+	private static final Logger logger = LogManager.getLogger("ImageUtil");
+
 	/**
 	 * Retourne un object ImageIcon
 	 * @param base Classe parente qui gère les ressources
@@ -18,12 +23,18 @@ public class ImageUtil {
 	 * @return L'object ImageIcon correspondant, ou null
 	 */
 	public static ImageIcon createImageIcon(Object base, String path) {
-		URL imgUrl = base.getClass().getResource(path);
-		if(imgUrl != null) {
-			return new ImageIcon(imgUrl);
+		if(path != null) {
+			URL imgUrl = base.getClass().getResource(path);
+
+			if(imgUrl != null) {
+				return new ImageIcon(imgUrl);
+			}
+
+			logger.error("Couldn't find file: " + path);
+		} else {
+			logger.error("The image path is null");
 		}
 
-		System.err.println("Couldn't find file: " + path);
 		return null;
 	}
 
