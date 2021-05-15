@@ -65,7 +65,7 @@ public class SendAlert {
 			StringBuilder msg = new StringBuilder();
 			msg.append(ResourceUtil.getResourceContent(parent, "/mails/alert_header.html"));
 
-			for(HostItem host : liste) {
+			for (HostItem host : liste) {
 				msg.append("<li>").append(host.getHostName()).append(" -  ").append(host.getHostIP().getHostAddress()).append("</li>");
 			}
 
@@ -77,7 +77,10 @@ public class SendAlert {
 			Transport.send(message);
 
 			result = true;
-		} catch (UnknownHostException | MessagingException e) {
+		} catch (UnknownHostException e) {
+			logger.warn("The smtp server seems to be down, cannot send alert");
+			parent.getPrefManager().setString("smtp_addr", "");
+		} catch (MessagingException e) {
 			e.printStackTrace();
 			logger.fatal("Error while sending message : {}", e.getMessage());
 		}
