@@ -44,22 +44,33 @@ public class SendAlert {
 		boolean result = false;
 
 		try {
-			Properties prop = System.getProperties();
+			Properties prop = new Properties();
 			prop.put("mail.smtp.host", InetAddress.getByName(prefManager.getString("smtp_addr", "")));
 			prop.put("mail.smtp.port", prefManager.getInt("smtp_port", 25));
 			prop.put("mail.smtp.ssl.enable", prefManager.getBool("smtp_use_ssl", false));
-			prop.put("mail.smtp.auth", "true");
 
-			Session session = Session.getDefaultInstance(prop, new Authenticator() {
-				@Override
-				protected PasswordAuthentication getPasswordAuthentication() {
-					return new PasswordAuthentication(prefManager.getString("smtp_user", ""), prefManager.getString("smtp_pass", ""));
-				}
-			});
+			Session session;
+
+			if(!prefManager.getString("smtp_username", "").equals("")) {
+				//Authentification required
+				prop.put("mail.smtp.auth", "true");
+
+				session = Session.getInstance(prop,
+					new Authenticator() {
+						@Override
+						protected PasswordAuthentication getPasswordAuthentication() {
+							return new PasswordAuthentication(
+									prefManager.getString("smtp_username", ""),
+									prefManager.getString("smtp_password", ""));
+						}
+					});
+			} else {
+				session = Session.getDefaultInstance(prop);
+			}
 
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(prefManager.getString("smtp_sender", "")));
-			message.setRecipient(Message.RecipientType.TO, new InternetAddress(prefManager.getString("smtp_dest", "")));
+			message.setRecipient(Message.RecipientType.TO, InternetAddress.parse(prefManager.getString("smtp_dest", ""))[0]);
 			message.setSubject("Alerte monitoring");
 
 			StringBuilder msg = new StringBuilder();
@@ -83,6 +94,7 @@ public class SendAlert {
 		} catch (MessagingException e) {
 			e.printStackTrace();
 			logger.fatal("Error while sending message : {}", e.getMessage());
+			parent.getPrefManager().setString("smtp_addr", "");
 		}
 
 		return result;
