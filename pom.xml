@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>fr.chsn</groupId>
 	<artifactId>HostPingChecker</artifactId>
-	<version>1.10.8-BETA</version>
+	<version>1.12.5-BETA</version>
 
 	<developers>
 		<developer>
@@ -14,6 +14,8 @@
 	<properties>
 		<jdk.version>14</jdk.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<timestamp>${maven.build.timestamp}</timestamp>
+		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
 	</properties>
 
 	<dependencies>
@@ -21,6 +23,12 @@
 			<groupId>com.jolira</groupId>
 			<artifactId>onejar-maven-plugin</artifactId>
 			<version>1.4.4</version>
+			<exclusions>
+				<exclusion>
+					<groupId>junit</groupId>
+					<artifactId>junit</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>com.sun.mail</groupId>
@@ -37,6 +45,11 @@
 			<artifactId>log4j-core</artifactId>
 			<version>2.13.3</version>
 		</dependency>
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.8.6</version>
+		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/commons-validator/commons-validator -->
 		<dependency>
@@ -44,11 +57,30 @@
 			<artifactId>commons-validator</artifactId>
 			<version>1.7</version>
 		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter</artifactId>
+			<version>5.7.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<version>5.7.1</version>
+			<scope>compile</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
-		<sourceDirectory>src</sourceDirectory>
+		<testSourceDirectory>src/test/java</testSourceDirectory>
 		<plugins>
+			<!-- Maven plugin to run tests -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.22.1</version>
+			</plugin>
+
 			<!-- Download source code, best practice -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
