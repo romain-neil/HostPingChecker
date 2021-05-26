@@ -1,7 +1,6 @@
 package fr.chsn.hostpingchecker;
 
 import fr.chsn.hostpingchecker.utils.ImageUtil;
-import org.apache.commons.validator.routines.InetAddressValidator;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
@@ -138,14 +137,8 @@ public class DynamicObjectModel extends AbstractTableModel {
 	 * @since 1.12.3
 	 */
 	public void refreshIPs() throws UnknownHostException {
-		InetAddressValidator validator = InetAddressValidator.getInstance();
-
 		for(HostItem item : items) {
-			if(!validator.isValid(item.getDNSHostName()) && item.getDNSHostName() != null && !item.getDNSHostName().isEmpty()) {
-				item.setHostIP(InetAddress.getByName(item.getHostName()));
-			} else { //DNS hostname is already a IP
-				item.setHostIP(InetAddress.getByName(item.getDNSHostName()));
-			}
+			item.setHostIP(InetAddress.getByName(item.getDNSHostName()));
 		}
 	}
 }
