@@ -1,10 +1,8 @@
 import fr.chsn.hostpingchecker.HostItem;
 import fr.chsn.hostpingchecker.utils.HostStatusUtil;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
@@ -45,6 +43,10 @@ class HostItemTest {
 		testItem.setHostIP(InetAddress.getByName(newIP));
 
 		assertEquals(InetAddress.getByName(newIP), testItem.getHostIP());
+
+		assertDoesNotThrow(() -> {
+			testItem.isReachable();
+		});
 	}
 
 	@Test
