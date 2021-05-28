@@ -1,5 +1,5 @@
-import fr.chsn.hostpingchecker.DynamicObjectModel;
-import fr.chsn.hostpingchecker.HostItem;
+package fr.chsn.hostpingchecker;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

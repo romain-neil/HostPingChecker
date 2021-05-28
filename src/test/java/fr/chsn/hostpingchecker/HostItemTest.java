@@ -1,4 +1,5 @@
-import fr.chsn.hostpingchecker.HostItem;
+package fr.chsn.hostpingchecker;
+
 import fr.chsn.hostpingchecker.utils.HostStatusUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
