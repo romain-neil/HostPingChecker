@@ -2,12 +2,16 @@ package fr.chsn.hostpingchecker.utils.connector;
 
 public class VirtualFileSystemConnector extends AbstractConnector {
 
+	private String buffer;
+
 	@Override
-	public void write(String path, String content) {}
+	public void write(String path, String content) {
+		buffer = content;
+	}
 
 	@Override
 	public String read(String path) {
-		return null;
+		return buffer;
 	}
 
 	@Override
