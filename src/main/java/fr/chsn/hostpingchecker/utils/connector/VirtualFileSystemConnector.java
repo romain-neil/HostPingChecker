@@ -1,6 +1,6 @@
 package fr.chsn.hostpingchecker.utils.connector;
 
-public class VirtualFileSystemConnector extends AbstractConnector {
+public class VirtualFileSystemConnector extends AbstractFSConnector {
 
 	private String buffer;
 

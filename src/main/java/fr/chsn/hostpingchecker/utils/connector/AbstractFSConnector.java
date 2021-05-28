@@ -2,7 +2,7 @@ package fr.chsn.hostpingchecker.utils.connector;
 
 import java.io.IOException;
 
-public abstract class AbstractConnector {
+public abstract class AbstractFSConnector {
 
 	public abstract void write(String path, String content) throws IOException;
 

@@ -3,7 +3,7 @@ package fr.chsn.hostpingchecker.utils.connector;
 import java.io.BufferedWriter;
 import java.io.IOException;
 
-public class FileSystemConnector extends AbstractConnector {
+public class FileSystemConnector extends AbstractFSConnector {
 
 	private final BufferedWriter bufferedWriter;
 
