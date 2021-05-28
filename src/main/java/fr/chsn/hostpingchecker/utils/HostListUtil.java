@@ -3,6 +3,7 @@ package fr.chsn.hostpingchecker.utils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import fr.chsn.hostpingchecker.HostItem;
+import fr.chsn.hostpingchecker.utils.connector.AbstractFSConnector;
 import fr.chsn.hostpingchecker.utils.connector.FileSystemConnector;
 import org.apache.commons.io.IOUtils;
 
@@ -20,16 +21,23 @@ public class HostListUtil {
 
 	/**
 	 * Sauvegarde la liste des machines dans un fichier json
-	 * @param liste la liste des machines à sauvegarder
+	 * @param list la liste des machines à sauvegarder
 	 * @throws IOException si erreur lors de l'ouverture fu fichier
 	 */
-	public static void save(List<HostItem> liste) throws IOException {
+	public static void save(List<HostItem> list, AbstractFSConnector fs) throws IOException {
 		Gson gson = new Gson();
-		String json = gson.toJson(liste);
+		String json = gson.toJson(list);
 
-		FileSystemConnector fs = new FileSystemConnector(new FileWriter(SAVE_FILE));
+		if(fs == null) {
+			fs = new FileSystemConnector(new FileWriter(SAVE_FILE));
+		}
+
 		fs.write("", json);
 		fs.close();
+	}
+
+	public static void save(List<HostItem> list) throws IOException {
+		save(list, null);
 	}
 
 	/**
