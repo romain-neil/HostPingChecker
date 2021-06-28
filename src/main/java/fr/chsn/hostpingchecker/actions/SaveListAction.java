@@ -32,7 +32,7 @@ public class SaveListAction extends AbstractAction {
 				HostListUtil.save(list);
 			} catch (IOException ioException) {
 				ioException.printStackTrace();
-				JOptionPane.showMessageDialog(parent, "Une ereeur est survenue lors de l'enregistrement de la liste des machines", "Erreur", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(parent, "Une ereur est survenue lors de l'enregistrement de la liste des machines", "Erreur", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 	}
