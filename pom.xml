@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>fr.chsn</groupId>
 	<artifactId>HostPingChecker</artifactId>
-	<version>1.12.9-BETA</version>
+	<version>1.12.10-BETA</version>
 
 	<developers>
 		<developer>
