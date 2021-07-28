@@ -23,7 +23,7 @@ public class VirtualFileSystemConnectorTest {
 
 	@AfterEach
 	void raz() {
-		vFsConnector.write("", "");
+		vFsConnector.write("");
 	}
 
 	@Test
@@ -34,7 +34,7 @@ public class VirtualFileSystemConnectorTest {
 
 	@Test
 	void testWriteDoesNotThrow() {
-		assertDoesNotThrow(() -> vFsConnector.write("", ""));
+		assertDoesNotThrow(() -> vFsConnector.write(""));
 	}
 
 	@Test
@@ -48,7 +48,7 @@ public class VirtualFileSystemConnectorTest {
 		new Random().nextBytes(array);
 		String generatedString = new String(array, StandardCharsets.UTF_8);
 
-		vFsConnector.write("test", generatedString);
+		vFsConnector.write(generatedString);
 
 		assertEquals(vFsConnector.read("test"), generatedString);
 	}

@@ -4,7 +4,7 @@ import java.io.IOException;
 
 public abstract class AbstractFSConnector {
 
-	public abstract void write(String path, String content) throws IOException;
+	public abstract void write(String content) throws IOException;
 
 	public abstract String read(String path);
 

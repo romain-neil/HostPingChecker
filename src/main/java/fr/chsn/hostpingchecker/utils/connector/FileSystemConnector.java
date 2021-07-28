@@ -12,7 +12,7 @@ public class FileSystemConnector extends AbstractFSConnector {
 	}
 
 	@Override
-	public void write(String path, String content) throws IOException {
+	public void write(String content) throws IOException {
 		bufferedWriter.write(content);
 	}
 

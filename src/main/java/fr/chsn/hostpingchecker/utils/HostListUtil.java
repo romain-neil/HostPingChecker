@@ -32,7 +32,7 @@ public class HostListUtil {
 			fs = new FileSystemConnector(new FileWriter(SAVE_FILE));
 		}
 
-		fs.write("", json);
+		fs.write(json);
 		fs.close();
 	}
 
