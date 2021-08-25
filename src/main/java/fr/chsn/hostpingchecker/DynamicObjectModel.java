@@ -30,9 +30,9 @@ public class DynamicObjectModel extends AbstractTableModel {
 	public DynamicObjectModel() {
 		super();
 
-		iconUnknown = ImageUtil.getscaledImage(Objects.requireNonNull(ImageUtil.createImageIcon(this, "/UI/icons/question.png")), 16, 16);
-		iconBad = ImageUtil.getscaledImage(Objects.requireNonNull(ImageUtil.createImageIcon(this, "/UI/icons/warning.png")), 16, 16);
-		iconOk = ImageUtil.getscaledImage(Objects.requireNonNull(ImageUtil.createImageIcon(this, "/UI/icons/ok.png")), 16, 16);
+		iconUnknown = ImageUtil.getScaledImage(Objects.requireNonNull(ImageUtil.createImageIcon(this, "/UI/icons/question.png")), 16, 16);
+		iconBad = ImageUtil.getScaledImage(Objects.requireNonNull(ImageUtil.createImageIcon(this, "/UI/icons/warning.png")), 16, 16);
+		iconOk = ImageUtil.getScaledImage(Objects.requireNonNull(ImageUtil.createImageIcon(this, "/UI/icons/ok.png")), 16, 16);
 	}
 
 	/**

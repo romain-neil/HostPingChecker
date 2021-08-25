@@ -45,7 +45,7 @@ public class ImageUtil {
 	 * @param h hauteur
 	 * @return Retourne l'object ImageIcon redimensionné
 	 */
-	public static ImageIcon getscaledImage(ImageIcon icon, int w, int h) {
+	public static ImageIcon getScaledImage(ImageIcon icon, int w, int h) {
 		int nw = icon.getIconWidth();
 		int nh = icon.getIconHeight();
 

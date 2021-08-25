@@ -57,8 +57,8 @@ public class MainWindow extends JFrame implements KeyListener {
 
 		loadPreferences();
 
-		iconStart = ImageUtil.getscaledImage(Objects.requireNonNull(ImageUtil.createImageIcon(this, "/UI/icons/start.png")), 32, 32);
-		iconStop = ImageUtil.getscaledImage(Objects.requireNonNull(ImageUtil.createImageIcon(this, "/UI/icons/stop.png")), 32, 32);
+		iconStart = ImageUtil.getScaledImage(Objects.requireNonNull(ImageUtil.createImageIcon(this, "/UI/icons/start.png")), 32, 32);
+		iconStop = ImageUtil.getScaledImage(Objects.requireNonNull(ImageUtil.createImageIcon(this, "/UI/icons/stop.png")), 32, 32);
 
 		btnStart = new JButton(iconStart);
 		JButton btnStop = new JButton(iconStop);
