@@ -61,6 +61,8 @@ class DynamicObjectModelTest {
 
 		assertEquals(String.class, dom.getValueAt(0, 0).getClass());
 		assertEquals(ImageIcon.class, dom.getValueAt(0, 2).getClass());
+
+		assertNull(dom.getValueAt(0, 3));
 	}
 
 	@Test
@@ -70,6 +72,12 @@ class DynamicObjectModelTest {
 		assertEquals(ImageIcon.class, dom.getColumnClass(2));
 
 		assertEquals(Object.class, dom.getColumnClass(-1)); //Cover default switch case as columnIndex >= 0
+	}
+
+	@Test
+	void testCellIsEditable() {
+		assertTrue(dom.isCellEditable(0, 0));
+		assertTrue(dom.isCellEditable(1, 0));
 	}
 
 	@Test
