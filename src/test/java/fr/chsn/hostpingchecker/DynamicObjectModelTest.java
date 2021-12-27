@@ -78,6 +78,9 @@ class DynamicObjectModelTest {
 	void testCellIsEditable() {
 		assertTrue(dom.isCellEditable(0, 0));
 		assertTrue(dom.isCellEditable(1, 0));
+
+		assertFalse(dom.isCellEditable(0, 1));
+		assertFalse(dom.isCellEditable(1, 1));
 	}
 
 	@Test
