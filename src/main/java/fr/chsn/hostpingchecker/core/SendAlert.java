@@ -4,12 +4,12 @@ import fr.chsn.hostpingchecker.HostItem;
 import fr.chsn.hostpingchecker.MainWindow;
 import fr.chsn.hostpingchecker.utils.PreferencesManager;
 import fr.chsn.hostpingchecker.utils.ResourceUtil;
+import jakarta.mail.*;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeMessage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.mail.*;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Date;
@@ -40,7 +40,7 @@ public class SendAlert {
 		this.liste = itemList;
 	}
 
-	public boolean send() {
+	public boolean send() throws MessagingException {
 		boolean result = false;
 
 		try {

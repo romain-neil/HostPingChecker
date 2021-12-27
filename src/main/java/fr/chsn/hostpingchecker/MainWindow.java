@@ -8,6 +8,7 @@ import fr.chsn.hostpingchecker.core.SendAlert;
 import fr.chsn.hostpingchecker.tasks.VerifyHostTask;
 import fr.chsn.hostpingchecker.utils.ImageUtil;
 import fr.chsn.hostpingchecker.utils.PreferencesManager;
+import jakarta.mail.MessagingException;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
@@ -281,8 +282,12 @@ public class MainWindow extends JFrame implements KeyListener {
 	public void sendMail(java.util.List<HostItem> liste) {
 		SendAlert alerte = new SendAlert(this, liste);
 
-		if(!alerte.send()) {//Silent warning
-			setStatus("Error: unable to send alert mail at " + new Date() + " !");
+		try {
+			if(!alerte.send()) {//Silent warning
+				setStatus("Error: unable to send alert mail at " + new Date() + " !");
+			}
+		} catch (MessagingException e) {
+			e.printStackTrace();
 		}
 	}
 
