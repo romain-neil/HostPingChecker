@@ -1,5 +1,6 @@
 package fr.chsn.hostpingchecker.utils;
 
+import java.util.HashMap;
 import java.util.prefs.Preferences;
 
 /**
@@ -76,6 +77,23 @@ public class PreferencesManager {
 	 */
 	public boolean getBool(String key, boolean defaultVal) {
 		return prefs.getBoolean(key, defaultVal);
+	}
+
+	/**
+	 * Sauvegarde en single shot un tableau de paramètres
+	 * @param parameters Les paramètres
+	 * @since 1.13.0
+	 */
+	public void set(HashMap<String, Object> parameters) {
+		for(var entry : parameters.entrySet()) {
+			if(entry.getValue() instanceof Boolean) {
+				setBool(entry.getKey(), (Boolean) entry.getValue());
+			} else if (entry.getValue() instanceof  String) {
+				setString(entry.getKey(), (String) entry.getValue());
+			} else if(entry.getValue() instanceof Integer) {
+				setInt(entry.getKey(), (int) entry.getValue());
+			}
+		}
 	}
 
 }
