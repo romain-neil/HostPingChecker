@@ -94,16 +94,12 @@ class DynamicObjectModelTest {
 			dom.addItem(invalidHost);
 		} catch (Exception e) {
 			if(e instanceof UnknownHostException) {
-				fail("The method should not perform a dns requets");
+				fail("The method should not perform a dns request");
 			}
 
 			fail(e.getMessage());
 		}
 
-		//Change host name to invalid domain
-		//dom.getHostList().get(1).setHostName(null);
-
-		//assertThrows(UnknownHostException.class, () -> dom.refreshIPs());
 	}
 
 }
