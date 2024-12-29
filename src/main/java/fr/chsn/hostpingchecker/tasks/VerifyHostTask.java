@@ -34,7 +34,7 @@ public class VerifyHostTask extends TimerTask {
 	 * @since 1.12.2
 	 */
 	private void updateDownHostList() throws IOException {
-		if(downHostsList.size() != 0) {
+		if(!downHostsList.isEmpty()) {
 			for(HostItem host : downHostsList) { //For each down machine
 				HostStatusUtil.Status hostStatus = host.getStatus();
 
@@ -56,7 +56,7 @@ public class VerifyHostTask extends TimerTask {
 	}
 
 	private void sendWOLToHosts() throws IOException {
-		if(downHostsList.size() != 0) {
+		if(!downHostsList.isEmpty()) {
 			for(HostItem host : downHostsList) {
 				if(!host.getHostIP().toString().isEmpty() && !host.getMACAddress().isEmpty()) {
 					WakeOnLan.sendToHost(host.getMACAddress(), host.getHostIP().toString());
