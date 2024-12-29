@@ -18,7 +18,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.net.UnknownHostException;
 import java.util.Date;
-import java.util.Objects;
 import java.util.TimerTask;
 
 public class MainWindow extends JFrame implements KeyListener {
@@ -58,8 +57,8 @@ public class MainWindow extends JFrame implements KeyListener {
 
 		loadPreferences();
 
-		iconStart = ImageUtil.getScaledImage(Objects.requireNonNull(ImageUtil.createImageIcon(this, "/UI/icons/start.png")), 32, 32);
-		iconStop = ImageUtil.getScaledImage(Objects.requireNonNull(ImageUtil.createImageIcon(this, "/UI/icons/stop.png")), 32, 32);
+		iconStart = ImageUtil.getScaledImage(ImageUtil.createImageIcon(this, "/UI/icons/start.png"), 32, 32);
+		iconStop = ImageUtil.getScaledImage(ImageUtil.createImageIcon(this, "/UI/icons/stop.png"), 32, 32);
 
 		btnStart = new JButton(iconStart);
 		JButton btnStop = new JButton(iconStop);

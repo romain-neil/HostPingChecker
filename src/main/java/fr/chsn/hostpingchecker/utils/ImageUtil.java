@@ -6,6 +6,7 @@ import org.apache.logging.log4j.Logger;
 import javax.swing.*;
 import java.awt.*;
 import java.net.URL;
+import java.util.Objects;
 
 /**
  * Classe de fonctions utilitaires pour la manipulation d'images
@@ -46,20 +47,22 @@ public class ImageUtil {
 	 * @return Retourne l'object ImageIcon redimensionné
 	 */
 	public static ImageIcon getScaledImage(ImageIcon icon, int w, int h) {
-		int nw = icon.getIconWidth();
-		int nh = icon.getIconHeight();
+		ImageIcon ic = Objects.requireNonNull(icon);
 
-		if(icon.getIconWidth() > w) {
+		int nw = ic.getIconWidth();
+		int nh = ic.getIconHeight();
+
+		if(ic.getIconWidth() > w) {
 			nw = w;
-			nh = (nw * icon.getIconHeight()) / icon.getIconWidth();
+			nh = (nw * ic.getIconHeight()) / ic.getIconWidth();
 		}
 
 		if(nh > h) {
 			nh = h;
-			nw = (icon.getIconWidth() * nh) / icon.getIconHeight();
+			nw = (ic.getIconWidth() * nh) / ic.getIconHeight();
 		}
 
-		return new ImageIcon(icon.getImage().getScaledInstance(nw, nh, Image.SCALE_DEFAULT));
+		return new ImageIcon(ic.getImage().getScaledInstance(nw, nh, Image.SCALE_DEFAULT));
 	}
 
 }

@@ -8,7 +8,6 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * @author Romain Neil
@@ -30,9 +29,9 @@ public class DynamicObjectModel extends AbstractTableModel {
 	public DynamicObjectModel() {
 		super();
 
-		iconUnknown = ImageUtil.getScaledImage(Objects.requireNonNull(ImageUtil.createImageIcon(this, "/UI/icons/question.png")), 16, 16);
-		iconBad = ImageUtil.getScaledImage(Objects.requireNonNull(ImageUtil.createImageIcon(this, "/UI/icons/warning.png")), 16, 16);
-		iconOk = ImageUtil.getScaledImage(Objects.requireNonNull(ImageUtil.createImageIcon(this, "/UI/icons/ok.png")), 16, 16);
+		iconUnknown = ImageUtil.getScaledImage(ImageUtil.createImageIcon(this, "/UI/icons/question.png"), 16, 16);
+		iconBad = ImageUtil.getScaledImage(ImageUtil.createImageIcon(this, "/UI/icons/warning.png"), 16, 16);
+		iconOk = ImageUtil.getScaledImage(ImageUtil.createImageIcon(this, "/UI/icons/ok.png"), 16, 16);
 	}
 
 	/**
