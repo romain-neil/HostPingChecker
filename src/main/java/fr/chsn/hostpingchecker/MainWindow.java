@@ -68,30 +68,7 @@ public class MainWindow extends JFrame implements KeyListener {
 
 		lblStatus = new JLabel("");
 
-		JMenuBar menuBar = new JMenuBar();
-
-		//Création des menus
-		JMenu menuFile = new JMenu("Fichier");
-		JMenu menuPrefs = new JMenu("Paramètres");
-		JMenu menuHelp = new JMenu("Aide");
-
-		JMenuItem loadList = new JMenuItem(new LoadListAction(this, "Charger une liste"));
-		JMenuItem saveList = new JMenuItem(new SaveListAction(this, "Sauvegarder la liste"));
-
-		menuFile.add(loadList);
-		menuFile.add(saveList);
-
-		JMenuItem showPrefs = new JMenuItem(new OpenPrefsAction(this, "Editer les préférences"));
-
-		menuPrefs.add(showPrefs);
-
-		JMenuItem showHelp = new JMenuItem(new ShowHelp(this, "A propos"));
-
-		menuHelp.add(showHelp);
-
-		menuBar.add(menuFile);
-		menuBar.add(menuPrefs);
-		menuBar.add(menuHelp);
+		JMenuBar menuBar = getMenu();
 
 		setSize(500, 600);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -243,6 +220,35 @@ public class MainWindow extends JFrame implements KeyListener {
 				btnRefreshIP.setEnabled(true);
 			}
 		});
+	}
+
+	private JMenuBar getMenu() {
+		JMenuBar menuBar = new JMenuBar();
+
+		//Création des menus
+		JMenu menuFile = new JMenu("Fichier");
+		JMenu menuPrefs = new JMenu("Paramètres");
+		JMenu menuHelp = new JMenu("Aide");
+
+		JMenuItem loadList = new JMenuItem(new LoadListAction(this, "Charger une liste"));
+		JMenuItem saveList = new JMenuItem(new SaveListAction(this, "Sauvegarder la liste"));
+
+		menuFile.add(loadList);
+		menuFile.add(saveList);
+
+		JMenuItem showPrefs = new JMenuItem(new OpenPrefsAction(this, "Editer les préférences"));
+
+		menuPrefs.add(showPrefs);
+
+		JMenuItem showHelp = new JMenuItem(new ShowHelp(this, "A propos"));
+
+		menuHelp.add(showHelp);
+
+		menuBar.add(menuFile);
+		menuBar.add(menuPrefs);
+		menuBar.add(menuHelp);
+
+		return menuBar;
 	}
 
 	/**
