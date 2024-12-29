@@ -29,7 +29,7 @@ public class VirtualFileSystemConnectorTest {
 	@Test
 	void testConstructObj() {
 		Assertions.assertDoesNotThrow(() -> vFsConnector.read("/dev/null"));
-		assertEquals(vFsConnector.read(""), "");
+		assertEquals("", vFsConnector.read(""));
 	}
 
 	@Test
