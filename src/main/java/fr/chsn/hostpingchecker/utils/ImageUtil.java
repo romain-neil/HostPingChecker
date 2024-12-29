@@ -30,7 +30,7 @@ public class ImageUtil {
 				return new ImageIcon(imgUrl);
 			}
 
-			logger.error("Couldn't find file: " + path);
+            logger.error("Couldn't find file: {}", path);
 		} else {
 			logger.error("The image path is null");
 		}
