@@ -34,23 +34,16 @@ public class VerifyHostTask extends TimerTask {
 	 * @since 1.12.2
 	 */
 	private void updateDownHostList() throws IOException {
-		if(!downHostsList.isEmpty()) {
-			for(HostItem host : downHostsList) { //For each down machine
-				HostStatusUtil.Status hostStatus = host.getStatus();
+		for(HostItem host : model.getHostList()) {
+			if (host.isReachable()) {
+				host.setStatus(HostStatusUtil.Status.OK);
 
-				//If the host was previously reachable
-				if(hostStatus != HostStatusUtil.Status.BAD) {
-					if(!host.isReachable()) { //If the host is down
-						downHostsList.add(host);
-						host.setStatus(HostStatusUtil.Status.BAD);
+				downHostsList.remove(host);
+			} else {
+				host.setStatus(HostStatusUtil.Status.BAD);
+				System.out.println("New host down : " + host.getHostName());
 
-						System.out.println("New host down : " + host.getHostName());
-					} else {
-						//The host is reachable
-						downHostsList.remove(host);
-						host.setStatus(HostStatusUtil.Status.OK);
-					}
-				}
+				downHostsList.add(host);
 			}
 		}
 	}
